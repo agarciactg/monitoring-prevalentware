@@ -1,0 +1,28 @@
+{
+  "name": "monitoring-prevalentware",
+  "version": "1.0.0",
+  "description": "Grapghql API with Nodejs, Prisma, Postgres and Docker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Grapghql",
+    "API",
+    "Node.js",
+    "Prisma",
+    "Postgres",
+    "Docker"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.5.2",
+    "apollo-server": "^3.12.1",
+    "graphql": "^16.8.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.5.2"
+  }
+}
