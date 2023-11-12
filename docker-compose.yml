@@ -1,14 +1,32 @@
-version: '3.8'
+version: "3.8"
+
 services:
   postgres:
     image: postgres:13
     restart: always
-    environment:
-      - POSTGRES_USER=db_user
-      - POSTGRES_PASSWORD=db_password
+    env_file: .env
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file: .env
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "9090:9090"
+    depends_on:
+      - postgres
+
 volumes:
   postgres:
