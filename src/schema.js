@@ -16,8 +16,8 @@ const typeDefs = gql`
   }
 
   type User {
-    id: ID!
-    email: String!
+    id: ID
+    email: String
     emailVerified: String
     termsAndConditionsAccepted: String
     name: String
@@ -41,7 +41,7 @@ const typeDefs = gql`
     usage: Int!
     description: String!
     userId: User
-    createAt: String!
+    createAt: String
   }
 
   type Country {
@@ -59,6 +59,11 @@ const typeDefs = gql`
 
   type Query {
     allUsers: [User!]!
+    detailUser(email: String!): User
+    allCountry: [Country!]!
+    allUserMonitoringByUser(email: String!, start_date: String!, end_date: String!): [UserMonitoring!]!
+    obtainThreeUsersMostRecord(start_date: String!, end_date: String!): [UserMonitoring!]!
+    obtainThreeUsersMostRecordDependetStatus(country_id: String, description: String, start_date: String!, end_date: String!): [UserMonitoring!]!
   }
 `
 
