@@ -219,8 +219,8 @@ const Query = {
             INNER JOIN public."Country" AS CO ON CO."id" = CTU."A"
             WHERE UM."description" = ${description}
                 AND CO."id" = ${country_id}
-                AND UM."createdAt" >= ${start_date}
-                AND UM."createdAt" <= ${end_date}
+                AND UM."createdAt" >= '2023-01-24 00:00:00'
+                AND UM."createdAt" <= '2023-05-11 00:00:00'
             GROUP BY UM."userId", UM."id"
             ORDER BY UM."userId" DESC
             LIMIT 3;
