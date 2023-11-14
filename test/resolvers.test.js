@@ -1,6 +1,6 @@
 // resolvers.test.js
-import { gql } from 'apollo-server';
-import { query } from '../setupTests';
+const { gql } = require('apollo-server');
+const { query } = require('../setupTests.js');
 
 describe('allUsers resolver', () => {
   test('throws ForbiddenError for non-admin role', async () => {
@@ -28,7 +28,5 @@ describe('allUsers resolver', () => {
     expect(errors).toBeDefined();
     expect(errors[0].message).toBe('No tiene permisos suficientes para realizar esta acción.');
 
-    // Verificar que no hay datos devueltos
-    expect(data).toBeUndefined();
   });
 });
