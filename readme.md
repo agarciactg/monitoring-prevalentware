@@ -34,6 +34,12 @@ POSTGRES_DB=
 ---------------------------------
 
 ### Instrucciones de ejecución
+
+instalar dependencias:
+```node.js
+npm install / npm i
+```
+
 Construir los contenedores de Docker:
 
 ```docker
