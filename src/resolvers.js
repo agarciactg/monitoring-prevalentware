@@ -48,7 +48,7 @@ const Query = {
     if (!role || !allowedRoles.includes(role.name)) {
       // rol type USER only serach self
       if (currentEmail !== email) {
-        throw new Error("Solo puede consultar sus datos");
+        throw new ForbiddenError("Solo puede consultar sus datos");
       }
     }
 
@@ -59,7 +59,10 @@ const Query = {
     });
 
     if (!user) {
-      throw new Error("Usuario no encontrado.");
+        throw new ApolloError("Usuario no encontrado.", 'USER_NOT_FOUND', {
+            customCode: 'NOT_FOUND', 
+            customStatus: 404,
+          });
     }
 
     return user;
@@ -111,7 +114,8 @@ const Query = {
     }
 
     // rol type USER only serach self
-    if (currentEmail !== email) {
+
+    if (role.name === 'User' && currentEmail !== email) {
       throw new ForbiddenError("Solo puede consultar sus datos");
     }
 
@@ -123,7 +127,10 @@ const Query = {
     });
 
     if (!user) {
-      throw new ApolloError("Usuario no encontrado.", 'USER_NOT_FOUND');
+      throw new ApolloError("Usuario no encontrado.", 'USER_NOT_FOUND', {
+        customCode: 'NOT_FOUND', 
+        customStatus: 404,
+      });
     }
 
     // get all userMonitoringUsers
@@ -161,7 +168,7 @@ const Query = {
     // validation current rol
     const allowedRoles = ["Admin"];
     if (!role || !allowedRoles.includes(role.name)) {
-      throw new Error("No tiene permiso de usuario.");
+        throw new ForbiddenError("No tiene permisos suficientes para realizar esta acción.");
     }
 
     // get all userMonitoringUsers
@@ -200,7 +207,7 @@ const Query = {
 
     const allowedRoles = ["Admin"];
     if (!role || !allowedRoles.includes(role.name)) {
-      throw new Error("No tiene permiso de usuario.");
+        throw new ForbiddenError("No tiene permisos suficientes para realizar esta acción.");
     }
 
     const userMonitorings = await prisma.$queryRaw(
